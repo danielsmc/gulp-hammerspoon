@@ -1,7 +1,10 @@
+hs.ipc.cliInstall()
+
 gulpState = {}
 gulpMenu = hs.menubar.new(false)
 
-hs.urlevent.bind("gulp", function(eventName, params)
+function gulpHandler (raw)
+	local params = hs.json.decode(raw)
 	if params.err then
 		hs.notify.new({title=params.project, informativeText=params.err}):send()
 	end
@@ -36,4 +39,4 @@ hs.urlevent.bind("gulp", function(eventName, params)
 	else
 		gulpMenu:removeFromMenuBar()
 	end
-end)
+end

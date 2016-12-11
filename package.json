@@ -6,7 +6,6 @@
   "author": "Daniel McLaughlin",
   "license": "MIT",
   "dependencies": {
-    "openurl": "^1.1.1",
     "signal-exit": "^3.0.2",
     "tildify": "^1.2.0"
   }

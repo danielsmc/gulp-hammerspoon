@@ -1,17 +1,15 @@
 var gulp = require('gulp');
-var openurl = require("openurl");
-var querystring = require('querystring');
 var onExit = require('signal-exit');
 var path = require('path');
 var tildify = require('tildify');
+var child_process = require('child_process');
 
 
 const projectName = tildify(path.resolve(__dirname).split('/node_modules')[0]);
 
 function send(params) {
   params.project = projectName;
-  const url = "hammerspoon://gulp?"+querystring.stringify(params);
-  openurl.open(url, e => (false)); // Fail silently if hammerspoon urls don't work
+  child_process.spawnSync('hs',{input:"gulpHandler('"+JSON.stringify(params)+"')"});
 }
 
 onExit(() => send({event: "quit"}));
