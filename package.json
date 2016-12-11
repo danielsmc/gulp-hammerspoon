@@ -1,0 +1,13 @@
+{
+  "name": "gulp-hammerspoon",
+  "version": "0.0.1",
+  "description": "Relay status info from Gulp to Hammerspoon",
+  "main": "index.js",
+  "author": "Daniel McLaughlin",
+  "license": "MIT",
+  "dependencies": {
+    "openurl": "^1.1.1",
+    "signal-exit": "^3.0.2",
+    "tildify": "^1.2.0"
+  }
+}
