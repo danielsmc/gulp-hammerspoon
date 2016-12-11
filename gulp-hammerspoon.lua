@@ -1,7 +1,10 @@
 gulpState = {}
-gulpMenu = hs.menubar.new()
+gulpMenu = hs.menubar.new(false)
 
 hs.urlevent.bind("gulp", function(eventName, params)
+	if params.err then
+		hs.notify.new({title=params.project, informativeText=params.err}):send()
+	end
 	local icons = {start="🍳", stop="🏆", err="👺"}
 	if params.event == "quit" then
 		gulpState[params.project] = nil
@@ -23,9 +26,14 @@ hs.urlevent.bind("gulp", function(eventName, params)
 			else
 				mainStatus = "stop"
 			end
-			table.insert(menuItems,{title=icons[status]..task})
+			table.insert(menuItems,{title=icons[status]..task, indent=1})
 		end
 	end
-	gulpMenu:setTitle(icons[mainStatus])
-	gulpMenu:setMenu(menuItems)
+	if mainStatus then
+		gulpMenu:returnToMenuBar()
+		gulpMenu:setTitle(icons[mainStatus])
+		gulpMenu:setMenu(menuItems)
+	else
+		gulpMenu:removeFromMenuBar()
+	end
 end)
