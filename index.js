@@ -9,7 +9,8 @@ const projectName = tildify(path.resolve(__dirname).split('/node_modules')[0]);
 
 function send(params) {
   params.project = projectName;
-  child_process.spawnSync('hs',{input:"gulpHandler('"+JSON.stringify(params)+"')"});
+  const b64json = Buffer.from(JSON.stringify(params),'utf8').toString('base64');
+  child_process.spawnSync('hs',{input:"gulpHandler('"+b64json+"')"});
 }
 
 onExit(() => send({event: "quit"}));

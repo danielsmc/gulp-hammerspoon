@@ -4,7 +4,7 @@ gulpState = {}
 gulpMenu = hs.menubar.new(false)
 
 function gulpHandler (raw)
-	local params = hs.json.decode(raw)
+	local params = hs.json.decode(hs.base64.decode(raw))
 	if params.err then
 		hs.notify.new({title=params.project, informativeText=params.err}):send()
 	end
